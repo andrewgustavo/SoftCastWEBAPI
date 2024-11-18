@@ -1,0 +1,5 @@
+# Ignore arquivos e pastas do Visual Studio
+.vs/
+*.user
+*.suo
+*.vscode/
