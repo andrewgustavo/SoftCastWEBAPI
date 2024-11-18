@@ -160,3 +160,4 @@ C:\Users\Andrew\source\repos\SoftCastWEBAPI\SoftCast\obj\Debug\net7.0\refint\Sof
 C:\Users\Andrew\source\repos\SoftCastWEBAPI\SoftCast\obj\Debug\net7.0\SoftCast.pdb
 C:\Users\Andrew\source\repos\SoftCastWEBAPI\SoftCast\obj\Debug\net7.0\SoftCast.genruntimeconfig.cache
 C:\Users\Andrew\source\repos\SoftCastWEBAPI\SoftCast\obj\Debug\net7.0\ref\SoftCast.dll
+C:\Users\Andrew\source\repos\SoftCastWEBAPI\SoftCast\obj\Debug\net7.0\SoftCast.sourcelink.json
