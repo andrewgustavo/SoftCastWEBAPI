@@ -28,8 +28,8 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "conteudo",
-        "Type": "SoftCast.Models.Conteudo",
+        "Name": "conteudoNovo",
+        "Type": "SoftCast.Models.ConteudoNovo",
         "IsRequired": true
       }
     ],
@@ -183,14 +183,14 @@
   {
     "ContainingType": "CriadoresController",
     "Method": "GetCriador",
-    "RelativePath": "api/Criadores/{id}",
+    "RelativePath": "api/Criadores/{email}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "id",
-        "Type": "System.Int32",
+        "Name": "email",
+        "Type": "System.String",
         "IsRequired": true
       }
     ],
@@ -245,15 +245,41 @@
   },
   {
     "ContainingType": "CriadoresController",
+    "Method": "GetCriadorById",
+    "RelativePath": "api/Criadores/id/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "SoftCast.Models.Criador",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CriadoresController",
     "Method": "Login",
-    "RelativePath": "api/Criadores/login",
+    "RelativePath": "api/Criadores/Login",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
         "Name": "loginRequest",
-        "Type": "SoftCast.Models.Criador",
+        "Type": "SoftCast.Models.CriadorLogin",
         "IsRequired": true
       }
     ],
@@ -262,7 +288,7 @@
   {
     "ContainingType": "CriadoresController",
     "Method": "RegisterCriador",
-    "RelativePath": "api/Criadores/register",
+    "RelativePath": "api/Criadores/Register",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,

@@ -19,7 +19,7 @@ public class CriadoresController : ControllerBase
         _context = context;
     }
     // Endpoint de cadastro
-    [HttpPost("register")]
+    [HttpPost("Register")]
     public async Task<IActionResult> RegisterCriador([FromBody] CriadorRegister CriadorRegister)
     {
         if (CriadorRegister == null || string.IsNullOrEmpty(CriadorRegister.Email) || string.IsNullOrEmpty(CriadorRegister.Senha))
@@ -52,17 +52,31 @@ public class CriadoresController : ControllerBase
     }
 
     // Endpoint de login 
-    [HttpPost("login")]
-    public IActionResult Login([FromBody] Criador loginRequest)
+    [HttpPost("Login")]
+    public IActionResult Login([FromBody] CriadorLogin loginRequest)
     {
-        var criador = _context.Criadores.FirstOrDefault(c => c.Email == loginRequest.Email && c.Senha == loginRequest.Senha);
-
-        if (criador == null)
+        if (string.IsNullOrWhiteSpace(loginRequest.Email) || string.IsNullOrWhiteSpace(loginRequest.Senha))
         {
-            return Unauthorized("Credenciais inválidas.");
+            return BadRequest(new { Message = "Email e senha são obrigatórios." });
         }
 
-        return Ok(new { Message = "Login realizado com sucesso!", Criador = criador });
+        var criador = _context.Criadores.FirstOrDefault(c => c.Email == loginRequest.Email);
+
+        if (criador == null || !BCrypt.Net.BCrypt.Verify(loginRequest.Senha, criador.Senha))
+        {
+            return Unauthorized(new { Message = "Credenciais inválidas." });
+        }
+
+        return Ok(new
+        {
+            Message = "Login realizado com sucesso!",
+            Criador = new
+            {
+                criador.ID,
+                criador.Nome,
+                criador.Email
+            }
+        });
     }
 
     [HttpGet]
@@ -71,12 +85,24 @@ public class CriadoresController : ControllerBase
         return await _context.Criadores.Include(c => c.Conteudos).ToListAsync();
     }
 
-    [HttpGet("{id}")]
-    public async Task<ActionResult<Criador>> GetCriador(int id)
+    [HttpGet("{email}")]
+    public async Task<ActionResult<Criador>> GetCriador(string email)
+    {
+        var criador = await _context.Criadores.Include(c => c.Conteudos)
+                                              .FirstOrDefaultAsync(c => c.Email == email);
+        if (criador == null) return NotFound();
+        return criador;
+    }
+
+    [HttpGet("id/{id}")]
+    public async Task<ActionResult<Criador>> GetCriadorById(int id)
     {
         var criador = await _context.Criadores.Include(c => c.Conteudos)
                                               .FirstOrDefaultAsync(c => c.ID == id);
-        if (criador == null) return NotFound();
+        if (criador == null)
+        {
+            return NotFound(new { Message = "Criador não encontrado." });
+        }
         return criador;
     }
 

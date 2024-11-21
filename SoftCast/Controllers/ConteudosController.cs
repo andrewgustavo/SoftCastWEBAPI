@@ -32,10 +32,30 @@ public class ConteudosController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<ActionResult<Conteudo>> CreateConteudo(Conteudo conteudo)
+    public async Task<ActionResult<Conteudo>> CreateConteudo(ConteudoNovo conteudoNovo)
     {
+        // Valida se o ConteudoNovo é válido
+        if (conteudoNovo == null)
+        {
+            return BadRequest("Conteúdo inválido.");
+        }
+
+        // Cria um objeto Conteudo com base no ConteudoNovo
+        var conteudo = new Conteudo
+        {
+            Titulo = conteudoNovo.Titulo,
+            Tipo = conteudoNovo.Tipo,
+            Descricao = conteudoNovo.Descricao,
+            ClassificacaoIndicativa = conteudoNovo.ClassificacaoIndicativa,
+            VideoPath = conteudoNovo.VideoPath,
+            CriadorID = conteudoNovo.CriadorID
+        };
+
+        // Adiciona ao contexto
         _context.Conteudos.Add(conteudo);
         await _context.SaveChangesAsync();
+
+        // Retorna o recurso criado
         return CreatedAtAction(nameof(GetConteudo), new { id = conteudo.ID }, conteudo);
     }
 

@@ -50,17 +50,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Conteudo"
+                "$ref": "#/components/schemas/ConteudoNovo"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/Conteudo"
+                "$ref": "#/components/schemas/ConteudoNovo"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/Conteudo"
+                "$ref": "#/components/schemas/ConteudoNovo"
               }
             }
           }
@@ -190,7 +190,7 @@
         }
       }
     },
-    "/api/Criadores/register": {
+    "/api/Criadores/Register": {
       "post": {
         "tags": [
           "Criadores"
@@ -221,7 +221,7 @@
         }
       }
     },
-    "/api/Criadores/login": {
+    "/api/Criadores/Login": {
       "post": {
         "tags": [
           "Criadores"
@@ -230,17 +230,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Criador"
+                "$ref": "#/components/schemas/CriadorLogin"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/Criador"
+                "$ref": "#/components/schemas/CriadorLogin"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/Criador"
+                "$ref": "#/components/schemas/CriadorLogin"
               }
             }
           }
@@ -336,7 +336,46 @@
         }
       }
     },
-    "/api/Criadores/{id}": {
+    "/api/Criadores/{email}": {
+      "get": {
+        "tags": [
+          "Criadores"
+        ],
+        "parameters": [
+          {
+            "name": "email",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Criador"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Criador"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Criador"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Criadores/id/{id}": {
       "get": {
         "tags": [
           "Criadores"
@@ -374,7 +413,9 @@
             }
           }
         }
-      },
+      }
+    },
+    "/api/Criadores/{id}": {
       "put": {
         "tags": [
           "Criadores"
@@ -1012,6 +1053,40 @@
         },
         "additionalProperties": false
       },
+      "ConteudoNovo": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "titulo": {
+            "type": "string",
+            "nullable": true
+          },
+          "tipo": {
+            "type": "string",
+            "nullable": true
+          },
+          "descricao": {
+            "type": "string",
+            "nullable": true
+          },
+          "classificacaoIndicativa": {
+            "type": "string",
+            "nullable": true
+          },
+          "videoPath": {
+            "type": "string",
+            "nullable": true
+          },
+          "criadorID": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
       "Criador": {
         "type": "object",
         "properties": {
@@ -1036,6 +1111,20 @@
             "items": {
               "$ref": "#/components/schemas/Conteudo"
             },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CriadorLogin": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "senha": {
+            "type": "string",
             "nullable": true
           }
         },
