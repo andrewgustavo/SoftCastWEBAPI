@@ -89,7 +89,56 @@
         }
       }
     },
-    "/api/Conteudos/{id}": {
+    "/api/Conteudos/criador/{criadorId}": {
+      "get": {
+        "tags": [
+          "Conteudos"
+        ],
+        "parameters": [
+          {
+            "name": "criadorId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Conteudo"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Conteudo"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Conteudo"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Conteudos/conteudo/{id}": {
       "get": {
         "tags": [
           "Conteudos"
@@ -127,7 +176,9 @@
             }
           }
         }
-      },
+      }
+    },
+    "/api/Conteudos/{id}": {
       "put": {
         "tags": [
           "Conteudos"
@@ -147,17 +198,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Conteudo"
+                "$ref": "#/components/schemas/ConteudoEdit"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/Conteudo"
+                "$ref": "#/components/schemas/ConteudoEdit"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/Conteudo"
+                "$ref": "#/components/schemas/ConteudoEdit"
               }
             }
           }
@@ -1019,36 +1070,67 @@
       "Conteudo": {
         "type": "object",
         "properties": {
-          "id": {
+          "ID": {
             "type": "integer",
             "format": "int32"
           },
-          "titulo": {
+          "Titulo": {
             "type": "string",
             "nullable": true
           },
-          "tipo": {
+          "Tipo": {
             "type": "string",
             "nullable": true
           },
-          "descricao": {
+          "Descricao": {
             "type": "string",
             "nullable": true
           },
-          "classificacaoIndicativa": {
+          "ClassificacaoIndicativa": {
             "type": "string",
             "nullable": true
           },
-          "videoPath": {
+          "VideoPath": {
             "type": "string",
             "nullable": true
           },
-          "criadorID": {
+          "CriadorID": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ConteudoEdit": {
+        "type": "object",
+        "properties": {
+          "ID": {
             "type": "integer",
             "format": "int32"
           },
-          "criador": {
-            "$ref": "#/components/schemas/Criador"
+          "Titulo": {
+            "type": "string",
+            "nullable": true
+          },
+          "Tipo": {
+            "type": "string",
+            "nullable": true
+          },
+          "Descricao": {
+            "type": "string",
+            "nullable": true
+          },
+          "ClassificacaoIndicativa": {
+            "type": "string",
+            "nullable": true
+          },
+          "VideoPath": {
+            "type": "string",
+            "nullable": true
+          },
+          "CriadorID": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false
@@ -1056,31 +1138,31 @@
       "ConteudoNovo": {
         "type": "object",
         "properties": {
-          "id": {
+          "ID": {
             "type": "integer",
             "format": "int32"
           },
-          "titulo": {
+          "Titulo": {
             "type": "string",
             "nullable": true
           },
-          "tipo": {
+          "Tipo": {
             "type": "string",
             "nullable": true
           },
-          "descricao": {
+          "Descricao": {
             "type": "string",
             "nullable": true
           },
-          "classificacaoIndicativa": {
+          "ClassificacaoIndicativa": {
             "type": "string",
             "nullable": true
           },
-          "videoPath": {
+          "VideoPath": {
             "type": "string",
             "nullable": true
           },
-          "criadorID": {
+          "CriadorID": {
             "type": "integer",
             "format": "int32"
           }
@@ -1090,23 +1172,23 @@
       "Criador": {
         "type": "object",
         "properties": {
-          "id": {
+          "ID": {
             "type": "integer",
             "format": "int32"
           },
-          "nome": {
+          "Nome": {
             "type": "string",
             "nullable": true
           },
-          "email": {
+          "Email": {
             "type": "string",
             "nullable": true
           },
-          "senha": {
+          "Senha": {
             "type": "string",
             "nullable": true
           },
-          "conteudos": {
+          "Conteudos": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Conteudo"
@@ -1119,11 +1201,11 @@
       "CriadorLogin": {
         "type": "object",
         "properties": {
-          "email": {
+          "Email": {
             "type": "string",
             "nullable": true
           },
-          "senha": {
+          "Senha": {
             "type": "string",
             "nullable": true
           }
@@ -1133,19 +1215,19 @@
       "CriadorRegister": {
         "type": "object",
         "properties": {
-          "id": {
+          "ID": {
             "type": "integer",
             "format": "int32"
           },
-          "nome": {
+          "Nome": {
             "type": "string",
             "nullable": true
           },
-          "email": {
+          "Email": {
             "type": "string",
             "nullable": true
           },
-          "senha": {
+          "Senha": {
             "type": "string",
             "nullable": true
           }
@@ -1155,18 +1237,18 @@
       "ItemPlaylist": {
         "type": "object",
         "properties": {
-          "playlistID": {
+          "PlaylistID": {
             "type": "integer",
             "format": "int32"
           },
-          "conteudoID": {
+          "ConteudoID": {
             "type": "integer",
             "format": "int32"
           },
-          "playlist": {
+          "Playlist": {
             "$ref": "#/components/schemas/Playlist"
           },
-          "conteudo": {
+          "Conteudo": {
             "$ref": "#/components/schemas/Conteudo"
           }
         },
@@ -1175,22 +1257,22 @@
       "Playlist": {
         "type": "object",
         "properties": {
-          "id": {
+          "ID": {
             "type": "integer",
             "format": "int32"
           },
-          "nome": {
+          "Nome": {
             "type": "string",
             "nullable": true
           },
-          "usuarioID": {
+          "UsuarioID": {
             "type": "integer",
             "format": "int32"
           },
-          "usuario": {
+          "Usuario": {
             "$ref": "#/components/schemas/Usuario"
           },
-          "conteudos": {
+          "Conteudos": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Conteudo"
@@ -1203,23 +1285,23 @@
       "Usuario": {
         "type": "object",
         "properties": {
-          "id": {
+          "ID": {
             "type": "integer",
             "format": "int32"
           },
-          "nome": {
+          "Nome": {
             "type": "string",
             "nullable": true
           },
-          "email": {
+          "Email": {
             "type": "string",
             "nullable": true
           },
-          "dtNascimento": {
+          "DtNascimento": {
             "type": "string",
             "format": "date-time"
           },
-          "playlists": {
+          "Playlists": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Playlist"

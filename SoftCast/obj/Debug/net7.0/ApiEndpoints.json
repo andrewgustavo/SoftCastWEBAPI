@@ -47,8 +47,45 @@
   },
   {
     "ContainingType": "ConteudosController",
-    "Method": "GetConteudo",
+    "Method": "UpdateConteudo",
     "RelativePath": "api/Conteudos/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "conteudo",
+        "Type": "SoftCast.Models.ConteudoEdit",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ConteudosController",
+    "Method": "DeleteConteudo",
+    "RelativePath": "api/Conteudos/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ConteudosController",
+    "Method": "GetConteudo",
+    "RelativePath": "api/Conteudos/conteudo/{id}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -73,40 +110,29 @@
   },
   {
     "ContainingType": "ConteudosController",
-    "Method": "UpdateConteudo",
-    "RelativePath": "api/Conteudos/{id}",
-    "HttpMethod": "PUT",
+    "Method": "GetConteudosByCriador",
+    "RelativePath": "api/Conteudos/criador/{criadorId}",
+    "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      },
-      {
-        "Name": "conteudo",
-        "Type": "SoftCast.Models.Conteudo",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "ConteudosController",
-    "Method": "DeleteConteudo",
-    "RelativePath": "api/Conteudos/{id}",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
+        "Name": "criadorId",
         "Type": "System.Int32",
         "IsRequired": true
       }
     ],
-    "ReturnTypes": []
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[SoftCast.Models.Conteudo, SoftCast, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   },
   {
     "ContainingType": "CriadoresController",

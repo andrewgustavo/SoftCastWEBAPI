@@ -2,7 +2,7 @@
 
 namespace SoftCast.Models
 {
-    public class Conteudo
+    public class ConteudoEdit
     {
         public int ID { get; set; }
         public string Titulo { get; set; }
@@ -12,7 +12,5 @@ namespace SoftCast.Models
         public string VideoPath { get; set; }
         public int CriadorID { get; set; }
 
-        [JsonIgnore]
-        public Criador Criador { get; set; }
     }
 }

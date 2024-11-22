@@ -22,7 +22,16 @@ public class ConteudosController : ControllerBase
         return await _context.Conteudos.Include(c => c.Criador).ToListAsync();
     }
 
-    [HttpGet("{id}")]
+    [HttpGet("criador/{criadorId}")]
+    public async Task<ActionResult<IEnumerable<Conteudo>>> GetConteudosByCriador(int criadorId)
+    {
+        Console.WriteLine($"CriadorID recebido: {criadorId}"); // Certifique-se de que o valor está correto
+        var conteudos = await _context.Conteudos.Where(c => c.CriadorID == criadorId).ToListAsync();
+        return Ok(conteudos);
+    }
+
+
+    [HttpGet("conteudo/{id}")]
     public async Task<ActionResult<Conteudo>> GetConteudo(int id)
     {
         var conteudo = await _context.Conteudos.Include(c => c.Criador)
@@ -60,10 +69,21 @@ public class ConteudosController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> UpdateConteudo(int id, Conteudo conteudo)
+    public async Task<IActionResult> UpdateConteudo(int id, ConteudoEdit conteudo)
     {
         if (id != conteudo.ID) return BadRequest();
-        _context.Entry(conteudo).State = EntityState.Modified;
+
+        var editConteudo = await _context.Conteudos.FindAsync(id);
+        if (editConteudo == null) return NotFound();
+
+        // Atualiza propriedades
+        editConteudo.Titulo = conteudo.Titulo;
+        editConteudo.Tipo = conteudo.Tipo;
+        editConteudo.Descricao = conteudo.Descricao;
+        editConteudo.ClassificacaoIndicativa = conteudo.ClassificacaoIndicativa;
+        editConteudo.VideoPath = conteudo.VideoPath;
+        editConteudo.CriadorID = conteudo.CriadorID;
+
         await _context.SaveChangesAsync();
         return NoContent();
     }
