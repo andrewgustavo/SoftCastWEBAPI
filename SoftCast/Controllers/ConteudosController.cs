@@ -41,7 +41,7 @@ public class ConteudosController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<ActionResult<Conteudo>> CreateConteudo(ConteudoNovo conteudoNovo)
+    public async Task<ActionResult<Conteudo>> CreateConteudo(ConteudoEdit conteudoNovo)
     {
         // Valida se o ConteudoNovo é válido
         if (conteudoNovo == null)

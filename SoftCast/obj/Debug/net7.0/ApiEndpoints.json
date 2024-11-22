@@ -29,7 +29,7 @@
     "Parameters": [
       {
         "Name": "conteudoNovo",
-        "Type": "SoftCast.Models.ConteudoNovo",
+        "Type": "SoftCast.Models.ConteudoEdit",
         "IsRequired": true
       }
     ],

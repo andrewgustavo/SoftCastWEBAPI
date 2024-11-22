@@ -50,17 +50,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ConteudoNovo"
+                "$ref": "#/components/schemas/ConteudoEdit"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/ConteudoNovo"
+                "$ref": "#/components/schemas/ConteudoEdit"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/ConteudoNovo"
+                "$ref": "#/components/schemas/ConteudoEdit"
               }
             }
           }
@@ -1102,40 +1102,6 @@
         "additionalProperties": false
       },
       "ConteudoEdit": {
-        "type": "object",
-        "properties": {
-          "ID": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "Titulo": {
-            "type": "string",
-            "nullable": true
-          },
-          "Tipo": {
-            "type": "string",
-            "nullable": true
-          },
-          "Descricao": {
-            "type": "string",
-            "nullable": true
-          },
-          "ClassificacaoIndicativa": {
-            "type": "string",
-            "nullable": true
-          },
-          "VideoPath": {
-            "type": "string",
-            "nullable": true
-          },
-          "CriadorID": {
-            "type": "integer",
-            "format": "int32"
-          }
-        },
-        "additionalProperties": false
-      },
-      "ConteudoNovo": {
         "type": "object",
         "properties": {
           "ID": {
