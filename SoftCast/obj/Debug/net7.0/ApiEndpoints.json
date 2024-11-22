@@ -611,5 +611,37 @@
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UsuariosController",
+    "Method": "Login",
+    "RelativePath": "api/Usuarios/Login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "loginRequest",
+        "Type": "SoftCast.Models.UsuarioLogin",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UsuariosController",
+    "Method": "RegisterUsuario",
+    "RelativePath": "api/Usuarios/Register",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "usuarioRegister",
+        "Type": "SoftCast.Models.UsuarioRegister",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
   }
 ]

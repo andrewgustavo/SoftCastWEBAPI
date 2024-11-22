@@ -16,6 +16,67 @@ public class UsuariosController : ControllerBase
         _context = context;
     }
 
+    // Endpoint de registro de usuário
+    [HttpPost("Register")]
+    public async Task<IActionResult> RegisterUsuario([FromBody] UsuarioRegister usuarioRegister)
+    {
+        if (usuarioRegister == null || string.IsNullOrEmpty(usuarioRegister.Email) || string.IsNullOrEmpty(usuarioRegister.Senha))
+        {
+            return BadRequest("Dados de cadastro inválidos.");
+        }
+
+        // Verificar se o usuário já existe
+        var existingUsuario = await _context.Usuarios
+            .FirstOrDefaultAsync(u => u.Email == usuarioRegister.Email);
+
+        if (existingUsuario != null)
+        {
+            return BadRequest("Já existe um usuário com esse e-mail.");
+        }
+
+        // Criar o usuário
+        var usuario = new Usuario
+        {
+            Nome = usuarioRegister.Nome,
+            Email = usuarioRegister.Email,
+            Senha = BCrypt.Net.BCrypt.HashPassword(usuarioRegister.Senha),
+            DtNascimento = usuarioRegister.DtNascimento
+        };
+
+        _context.Usuarios.Add(usuario);
+        await _context.SaveChangesAsync();
+
+        return Ok(new { Message = "Cadastro realizado com sucesso", UsuarioId = usuario.ID });
+    }
+
+    // Endpoint de login de usuário
+    [HttpPost("Login")]
+    public IActionResult Login([FromBody] UsuarioLogin loginRequest)
+    {
+        if (string.IsNullOrWhiteSpace(loginRequest.Email) || string.IsNullOrWhiteSpace(loginRequest.Senha))
+        {
+            return BadRequest(new { Message = "Email e senha são obrigatórios." });
+        }
+
+        var usuario = _context.Usuarios.FirstOrDefault(u => u.Email == loginRequest.Email);
+
+        if (usuario == null || !BCrypt.Net.BCrypt.Verify(loginRequest.Senha, usuario.Senha))
+        {
+            return Unauthorized(new { Message = "Credenciais inválidas." });
+        }
+
+        return Ok(new
+        {
+            Message = "Login realizado com sucesso!",
+            Usuario = new
+            {
+                usuario.ID,
+                usuario.Nome,
+                usuario.Email
+            }
+        });
+    }
+
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Usuario>>> GetUsuarios()
     {

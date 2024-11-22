@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SoftCast")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+74aa1c4e60c3f93d77b076438dc3c570296f6b5e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+970d252ffe020c49101384612e57082aeff3f411")]
 [assembly: System.Reflection.AssemblyProductAttribute("SoftCast")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SoftCast")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
