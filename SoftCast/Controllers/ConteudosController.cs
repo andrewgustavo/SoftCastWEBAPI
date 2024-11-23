@@ -82,7 +82,6 @@ public class ConteudosController : ControllerBase
         editConteudo.Descricao = conteudo.Descricao;
         editConteudo.ClassificacaoIndicativa = conteudo.ClassificacaoIndicativa;
         editConteudo.VideoPath = conteudo.VideoPath;
-        editConteudo.CriadorID = conteudo.CriadorID;
 
         await _context.SaveChangesAsync();
         return NoContent();

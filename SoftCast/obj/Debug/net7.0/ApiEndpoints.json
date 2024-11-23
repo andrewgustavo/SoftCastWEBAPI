@@ -208,32 +208,6 @@
   },
   {
     "ContainingType": "CriadoresController",
-    "Method": "GetCriador",
-    "RelativePath": "api/Criadores/{email}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "email",
-        "Type": "System.String",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "SoftCast.Models.Criador",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "CriadoresController",
     "Method": "UpdateCriador",
     "RelativePath": "api/Criadores/{id}",
     "HttpMethod": "PUT",
@@ -268,6 +242,32 @@
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CriadoresController",
+    "Method": "GetCriador",
+    "RelativePath": "api/Criadores/email/{email}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "email",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "SoftCast.Models.Criador",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   },
   {
     "ContainingType": "CriadoresController",
@@ -423,8 +423,8 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "playlist",
-        "Type": "SoftCast.Models.Playlist",
+        "Name": "playlistNova",
+        "Type": "SoftCast.Models.PlaylistEdit",
         "IsRequired": true
       }
     ],
@@ -481,7 +481,7 @@
       },
       {
         "Name": "playlist",
-        "Type": "SoftCast.Models.Playlist",
+        "Type": "SoftCast.Models.PlaylistEdit",
         "IsRequired": true
       }
     ],
@@ -502,6 +502,32 @@
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PlaylistsRepositoryController",
+    "Method": "GetPlaylistsByUserId",
+    "RelativePath": "api/PlaylistsRepository/usuario/{usuarioId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "usuarioId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[SoftCast.Models.Playlist, SoftCast, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   },
   {
     "ContainingType": "UsuariosController",
@@ -534,32 +560,6 @@
       {
         "Name": "usuario",
         "Type": "SoftCast.Models.Usuario",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "SoftCast.Models.Usuario",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "UsuariosController",
-    "Method": "GetUsuario",
-    "RelativePath": "api/Usuarios/{id}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
         "IsRequired": true
       }
     ],
@@ -611,6 +611,58 @@
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UsuariosController",
+    "Method": "GetUsuarios",
+    "RelativePath": "api/Usuarios/email/{email}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "email",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "SoftCast.Models.Usuario",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "UsuariosController",
+    "Method": "GetUsuario",
+    "RelativePath": "api/Usuarios/id/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "SoftCast.Models.Usuario",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   },
   {
     "ContainingType": "UsuariosController",

@@ -83,7 +83,16 @@ public class UsuariosController : ControllerBase
         return await _context.Usuarios.Include(u => u.Playlists).ToListAsync();
     }
 
-    [HttpGet("{id}")]
+    [HttpGet("email/{email}")]
+    public async Task<ActionResult<Usuario>> GetUsuarios(string email)
+    {
+        var usuario = await _context.Usuarios.Include(u => u.Playlists)
+                                              .FirstOrDefaultAsync(u => u.Email == email);
+        if (usuario == null) return NotFound();
+        return usuario;
+    }
+
+    [HttpGet("id/{id}")]
     public async Task<ActionResult<Usuario>> GetUsuario(int id)
     {
         var usuario = await _context.Usuarios.Include(u => u.Playlists)

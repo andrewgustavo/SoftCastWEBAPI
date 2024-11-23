@@ -31,19 +31,58 @@ public class PlaylistsRepositoryController : ControllerBase
         return playlist;
     }
 
-    [HttpPost]
-    public async Task<ActionResult<Playlist>> CreatePlaylist(Playlist playlist)
+    [HttpGet("usuario/{usuarioId}")]
+    public async Task<ActionResult<IEnumerable<Playlist>>> GetPlaylistsByUserId(int usuarioId)
     {
+        var playlists = await _context.Playlists
+                                      .Where(p => p.UsuarioID == usuarioId)  // Filtra pelas playlists do usuário
+                                      .Include(p => p.Conteudos)
+                                      .ToListAsync();
+
+        if (playlists == null || !playlists.Any())
+        {
+            return NotFound(new { Message = "Nenhuma playlist encontrada para este usuário." });
+        }
+
+        return Ok(playlists);  // Retorna as playlists encontradas
+    }
+
+
+    [HttpPost]
+    public async Task<ActionResult<Playlist>> CreatePlaylist(PlaylistEdit playlistNova)
+    {
+        // Valida se o ConteudoNovo é válido
+        if (playlistNova == null)
+        {
+            return BadRequest("Conteúdo inválido.");
+        }
+
+        // Cria um objeto Conteudo com base no ConteudoNovo
+        var playlist = new Playlist
+        {
+            Nome = playlistNova.Nome,
+            UsuarioID = playlistNova.UsuarioID
+        };
+
+        // Adiciona ao contexto
         _context.Playlists.Add(playlist);
         await _context.SaveChangesAsync();
+
+        // Retorna o recurso criado
         return CreatedAtAction(nameof(GetPlaylist), new { id = playlist.ID }, playlist);
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> UpdatePlaylist(int id, Playlist playlist)
+    public async Task<IActionResult> UpdatePlaylist(int id, PlaylistEdit playlist)
     {
         if (id != playlist.ID) return BadRequest();
-        _context.Entry(playlist).State = EntityState.Modified;
+        
+        var editPlaylist = await _context.Playlists.FindAsync(id);
+        if (editPlaylist == null) return NotFound();
+
+        // Atualiza propriedades
+        editPlaylist.Nome = playlist.Nome;
+
         await _context.SaveChangesAsync();
         return NoContent();
     }

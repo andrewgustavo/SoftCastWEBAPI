@@ -11,6 +11,5 @@ namespace SoftCast.Models
         public string ClassificacaoIndicativa { get; set; }
         public string VideoPath { get; set; }
         public int CriadorID { get; set; }
-
     }
 }

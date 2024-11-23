@@ -85,7 +85,7 @@ public class CriadoresController : ControllerBase
         return await _context.Criadores.Include(c => c.Conteudos).ToListAsync();
     }
 
-    [HttpGet("{email}")]
+    [HttpGet("email/{email}")]
     public async Task<ActionResult<Criador>> GetCriador(string email)
     {
         var criador = await _context.Criadores.Include(c => c.Conteudos)

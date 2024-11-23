@@ -387,7 +387,7 @@
         }
       }
     },
-    "/api/Criadores/{email}": {
+    "/api/Criadores/email/{email}": {
       "get": {
         "tags": [
           "Criadores"
@@ -739,17 +739,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Playlist"
+                "$ref": "#/components/schemas/PlaylistEdit"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/Playlist"
+                "$ref": "#/components/schemas/PlaylistEdit"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/Playlist"
+                "$ref": "#/components/schemas/PlaylistEdit"
               }
             }
           }
@@ -836,17 +836,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Playlist"
+                "$ref": "#/components/schemas/PlaylistEdit"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/Playlist"
+                "$ref": "#/components/schemas/PlaylistEdit"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/Playlist"
+                "$ref": "#/components/schemas/PlaylistEdit"
               }
             }
           }
@@ -875,6 +875,55 @@
         "responses": {
           "200": {
             "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/PlaylistsRepository/usuario/{usuarioId}": {
+      "get": {
+        "tags": [
+          "PlaylistsRepository"
+        ],
+        "parameters": [
+          {
+            "name": "usuarioId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Playlist"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Playlist"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Playlist"
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -1025,7 +1074,46 @@
         }
       }
     },
-    "/api/Usuarios/{id}": {
+    "/api/Usuarios/email/{email}": {
+      "get": {
+        "tags": [
+          "Usuarios"
+        ],
+        "parameters": [
+          {
+            "name": "email",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Usuario"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Usuario"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Usuario"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Usuarios/id/{id}": {
       "get": {
         "tags": [
           "Usuarios"
@@ -1063,7 +1151,9 @@
             }
           }
         }
-      },
+      }
+    },
+    "/api/Usuarios/{id}": {
       "put": {
         "tags": [
           "Usuarios"
@@ -1296,16 +1386,24 @@
           "UsuarioID": {
             "type": "integer",
             "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PlaylistEdit": {
+        "type": "object",
+        "properties": {
+          "ID": {
+            "type": "integer",
+            "format": "int32"
           },
-          "Usuario": {
-            "$ref": "#/components/schemas/Usuario"
-          },
-          "Conteudos": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Conteudo"
-            },
+          "Nome": {
+            "type": "string",
             "nullable": true
+          },
+          "UsuarioID": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false
